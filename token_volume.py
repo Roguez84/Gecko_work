@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 from IPython.display import display
 from pprint import pprint
+#from all_exchange_tokens import get_exchange_tokens
 
 def get_ticker_data(tokens):
     ticker_data = []
@@ -34,5 +35,6 @@ def get_ticker_data(tokens):
     return(df)
 
 
-a = get_ticker_data(['iotex','ethereum'])
+# a = get_ticker_data(['iotex','ethereum'])
+a = get_ticker_data(get_exchange_tokens('gate',19).coin_id.unique().tolist())
 print(a)

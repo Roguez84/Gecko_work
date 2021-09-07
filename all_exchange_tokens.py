@@ -16,25 +16,27 @@ def get_exchange_tokens(exchange,page_num):
         for i in range(len(tickers)):
             parsed_ticker = {
                 'coin_id': tickers[i]['coin_id'],
-                'base': tickers[i]['base'],
-                'target': tickers[i]['target'],
-                'target_coin_id': tickers[i]['target_coin_id'] if 'target_coin_id' in tickers[i].keys() else "N/A",
-                'market_identifier': tickers[i]['market']['identifier'],
-                'volume': tickers[i]['volume'],
-                'converted_volume_usd': tickers[i]['converted_volume']['usd'],
-                'trust_score': tickers[i]['trust_score'],
-                'timestamp': tickers[i]['timestamp'],
-                'is_anomaly': tickers[i]['is_anomaly'],
-                'is_stale': tickers[i]['is_stale'],
+                # 'base': tickers[i]['base'],
+                # 'target': tickers[i]['target'],
+                # 'target_coin_id': tickers[i]['target_coin_id'] if 'target_coin_id' in tickers[i].keys() else "N/A",
+                # 'market_identifier': tickers[i]['market']['identifier'],
+                # 'volume': tickers[i]['volume'],
+                # 'converted_volume_usd': tickers[i]['converted_volume']['usd'],
+                # 'trust_score': tickers[i]['trust_score'],
+                # 'timestamp': tickers[i]['timestamp'],
+                # 'is_anomaly': tickers[i]['is_anomaly'],
+                # 'is_stale': tickers[i]['is_stale'],
             }
             ticker_data.append(parsed_ticker)
     df = pd.DataFrame(ticker_data)
         #df.to_csv(f'./ticker_data/{exchange}_{page_num}.csv', header=True)
         # pass coin_id from other csv       
-    return(df)
+    return df
 
 a = get_exchange_tokens('gate',19)
 #a.to_csv(f'./ticker_data/gate_test.csv', header=True)
 
-gate_tokens = a.coin_id.unique().tolist()
-print(len(gate_tokens))
+#gate_tokens = a.coin_id.unique().tolist()
+gate_tokens = a.coin_id.unique()
+pd.DataFrame(gate_tokens).to_csv(f'./gate_tickers.csv', header=False,index=False)
+#print(len(gate_tokens))
