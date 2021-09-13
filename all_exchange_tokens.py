@@ -2,6 +2,9 @@ import pandas as pd
 import requests
 from IPython.display import display
 from pprint import pprint
+import csv
+
+
 
 def get_exchange_tokens(exchange,page_num):
     ticker_data = []
@@ -19,7 +22,7 @@ def get_exchange_tokens(exchange,page_num):
                 # 'base': tickers[i]['base'],
                 # 'target': tickers[i]['target'],
                 # 'target_coin_id': tickers[i]['target_coin_id'] if 'target_coin_id' in tickers[i].keys() else "N/A",
-                # 'market_identifier': tickers[i]['market']['identifier'],
+                 'market_identifier': tickers[i]['market']['identifier'],
                 # 'volume': tickers[i]['volume'],
                 # 'converted_volume_usd': tickers[i]['converted_volume']['usd'],
                 # 'trust_score': tickers[i]['trust_score'],
@@ -33,10 +36,10 @@ def get_exchange_tokens(exchange,page_num):
         # pass coin_id from other csv       
     return df
 
-a = get_exchange_tokens('gate',19)
+a = get_exchange_tokens('kucoin',19)
 #a.to_csv(f'./ticker_data/gate_test.csv', header=True)
 
 #gate_tokens = a.coin_id.unique().tolist()
 gate_tokens = a.coin_id.unique()
-pd.DataFrame(gate_tokens).to_csv(f'./gate_tickers.csv', header=False,index=False)
+pd.DataFrame(gate_tokens).to_csv(f'./kucoin_tickers.csv', header=False,index=False)
 #print(len(gate_tokens))
